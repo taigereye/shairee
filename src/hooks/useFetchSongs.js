@@ -1,27 +1,29 @@
-import { useState, useEffect } from 'react';
-import { fetchSongs } from './api'; // Import the fetch function from api.js
+import { useState, useEffect } from "react";
+import { getSongsFromGenius } from "../genius";
 
 
-// Custom hook to fetch songs on page load
-const useFetchSongs = () => {
+const useFetchSongs = (searchTerm) => {
   const [songs, setSongs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const loadSongs = async () => {
+    const fetchSongs = async () => {
+      if (!searchTerm) return; // Skip API call if no search term
+      
+      setLoading(true);
       try {
-        const fetchedSongs = await fetchSongs();
+        const fetchedSongs = await getSongsFromGenius(searchTerm);
         setSongs(fetchedSongs);
-      } catch (err) {
-        setError("Error fetching songs.");
+      } catch (error) {
+        setError(error);
       } finally {
         setLoading(false);
       }
     };
 
-    loadSongs();
-  }, []); // Empty array to run this effect once when the component is mounted
+    fetchSongs();
+  }, [searchTerm]);
 
   return { songs, loading, error };
 };
