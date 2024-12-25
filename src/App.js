@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
-import Fuse from "fuse.js";
+
 import './App.css';
-import { SONGS } from "./data";
-import SearchBar from "./SearchBar";
-import SongResults from "./SongResults";
-import NoSongResults from "./NoSongResults";
+import { fetchSongs } from "./genius"; // for Genius API
+import useFetchSongs from "./hooks/useFetchSongs";
+
+import SearchBar from "./components/SearchBar";
+import SongResults from "./components/SongResults";
+import NoSongResults from "./components/NoSongResults";
+
 
 const App = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [hasSearched, setHasSearched] = useState(false);
   const [filteredSongs, setFilteredSongs] = useState([]);
+  const { songs, loading, error } = useFetchSongs();
 
   useEffect(() => {
-    // Prevent search if no songs are loaded
-    if (!SONGS || SONGS.length === 0) {
-      return; 
+    if (!songs || songs.length === 0) {
+      return;
     }
 
-    const fuse = new Fuse(SONGS, {
+    const fuse = new Fuse(songs, {
       keys: ["title", "artists"],
       includeScore: false,
       threshold: 0.3,
@@ -25,13 +27,11 @@ const App = () => {
 
     if (searchTerm.trim() === "") {
       setFilteredSongs([]);
-      setHasSearched(false);
     } else {
       const results = fuse.search(searchTerm) || [];
       setFilteredSongs(results.map(result => result.item));
-      setHasSearched(true);
     }
-  }, [searchTerm]);
+  }, [searchTerm, songs]);
 
   return (
     <div className="app-container">
@@ -45,9 +45,11 @@ const App = () => {
 
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-        <SongResults filteredSongs={filteredSongs} searchTerm={searchTerm} />
+        {loading && <p>Loading songs...</p>} {/* Show loading state */}
+        {error && <p>{error}</p>} {/* Show error if there's one */}
 
-        <NoSongResults filteredSongs={filteredSongs} searchTerm={searchTerm} />
+        <SongResults filteredSongs={filteredSongs} />
+        <NoSongResults filteredSongs={filteredSongs} />
       </div>
     </div>
   );

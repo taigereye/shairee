@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+
 
 const SearchBar = ({ searchTerm, setSearchTerm }) => {
   return (
@@ -10,6 +11,6 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
       className="search-bar"
     />
   );
-}
+};
 
 export default SearchBar;
