@@ -1,0 +1,103 @@
+/* Global styles */
+body {
+  margin: 0;
+  font-family: 'Palatino', 'Garamond', serif;
+  overflow: hidden; /* prevent scrolling */
+}
+
+/* Main container with full height */
+.app-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+}
+
+/* Overlay PNG image with opacity */
+.app-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/mandala-burgundy-overlay.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: -1; /* keeps the overlay behind content */
+}
+
+.content-container {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  text-align: center;
+  z-index: 1; /* keeps the content above the overlay */
+}
+
+/* Title */
+.title {
+  font-family: 'Palatino', serif;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+/* Description */
+.description {
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+/* Search bar */
+.search-bar {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Search results dropdown */
+.song-results {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  z-index: 2; /* keeps the results above other content */
+}
+
+/* Individual song result item */
+.song-item {
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.song-item .song-title {
+  font-weight: bold; /* Bold title only */
+}
+
+/* Highlight item on hover */
+.song-item:hover {
+  background-color: #f0f0f0;
+}
+
+/* No song results message */
+.no-results {
+  color: #888;
+  margin-top: 10px;
+  font-size: 1rem;
+}
