@@ -30,7 +30,7 @@ body {
 
 .content-container {
   position: absolute;
-  top: 25%;
+  top: 15%;
   left: 50%;
   transform: translate(-50%, -25%);
   text-align: center;
@@ -55,6 +55,7 @@ body {
   width: 100%;
   max-width: 400px;
   padding: 10px;
+  font-family: 'Palatino', serif;
   font-size: 1rem;
   margin-bottom: 20px;
   border: 1px solid #ccc;
@@ -66,7 +67,7 @@ body {
   list-style-type: none;
   padding: 0;
   margin-top: 10px;
-  max-height: 200px;
+  max-height: 400px;
   overflow-y: auto;
   border: 1px solid #ccc;
   border-radius: 5px;

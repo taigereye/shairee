@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'; // Add useState and useEffect import
+
+import '../App.css';
 
 
 const SearchBar = ({ searchTerm, setSearchTerm }) => {
+  const [hasSearched, setHasSearched] = useState(false); // Track if search has been made
+
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+      setHasSearched(false);
+    } else {
+      setHasSearched(true);
+    }
+  }, [searchTerm]);
+
   return (
     <input
       type="text"

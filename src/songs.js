@@ -1,5 +1,3 @@
-export const SONGS_ALL = [].concat(SONGS_1950, SONGS_1960, SONGS_1970, SONGS_1980)
-
 const SONGS_1950 = [
   { "id": "1950-0001", "title": "Aaja Re Ab Mera Dil Pukara", "film": "Aah", "artists": [] },
   { "id": "1950-0002", "title": "Aaja Re Pardesi", "film": "Madhumati", "artists": [] },
@@ -523,3 +521,5 @@ const SONGS_1980 = [
   { "id": "1980-0142", "title": "Mujhe Naulakha Manga De Re", "film": "Sharaabi", "artists": [] },
   { "id": "1980-0143", "title": "Chanda Dekhe Chanda", "film": "Jhoothi", "artists": [] }
 ];
+
+export const SONGS_ALL = [].concat(SONGS_1950, SONGS_1960, SONGS_1970, SONGS_1980)

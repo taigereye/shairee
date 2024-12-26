@@ -1,31 +1,27 @@
 import { useState, useEffect } from "react";
-import { getSongsFromGenius } from "../genius";
 
 
+// Custom hook to filter songs based on search term
 const useFetchSongs = (searchTerm) => {
-  const [songs, setSongs] = useState([]);
+  const [filteredSongs, setFilteredSongs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchSongs = async () => {
-      if (!searchTerm) return; // Skip API call if no search term
-      
-      setLoading(true);
-      try {
-        const fetchedSongs = await getSongsFromGenius(searchTerm);
-        setSongs(fetchedSongs);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
+    const filterSongs = () => {
+      // Skip filtering if no search term
+      if (!searchTerm) return;
+
+      const results = SONGS_ALL.filter((song) =>
+        song.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setFilteredSongs(results);
     };
 
-    fetchSongs();
+    filterSongs();
   }, [searchTerm]);
 
-  return { songs, loading, error };
+  return { filteredSongs, loading, error };
 };
 
 export default useFetchSongs;

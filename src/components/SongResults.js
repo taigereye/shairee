@@ -1,23 +1,20 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
-const SongResults = ({ filteredSongs, searchTerm }) => {
+const SongResults = ({ filteredSongs, handleSongClick }) => {
+  const navigate = useNavigate();
+
   return (
-    <div>
-      {searchTerm && filteredSongs.length > 0 && (
-        <ul className="song-results">
-          {filteredSongs.map((song, index) => (
-            <li key={index} className="song-item" onClick={() => handleSongClick(song)}>
-              <div className="song-title">{song.title}</div>
-              <div className="song-artists">
-                — {song.artists.join(", ")}
-              </div>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <ul className="song-results">
+      {filteredSongs.map((song) => (
+        <li key={song.id} className="song-item" onClick={() => handleSongClick(song, navigate)}>
+          <div className="song-title"><strong>{song.title}</strong></div>
+          <div className="song-film">— {song.film}</div>
+        </li>
+      ))}
+    </ul>
   );
-}
+};
 
 export default SongResults;

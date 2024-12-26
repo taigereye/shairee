@@ -1,13 +1,11 @@
 import React from 'react';
 
-const NoResults = ({ filteredSongs, searchTerm }) => {
-  return (
-    <div>
-      {searchTerm && filteredSongs.length === 0 && (
-        <p className="no-results">No songs found</p>
-      )}
-    </div>
-  );
-}
 
-export default NoResults;
+const NoSongResults = ({ filteredSongs }) => {
+  if (filteredSongs.length === 0) {
+    return <p>No songs found</p>;
+  }
+  return null;
+};
+
+export default NoSongResults;
