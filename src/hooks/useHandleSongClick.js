@@ -9,21 +9,28 @@ const useHandleSongClick = () => {
   const [error, setError] = useState(null);
 
   const handleSongClick = async (song, navigate) => {
-    const geniusService = new GeniusService(); // Initialize GeniusService here
+    const geniusService = new GeniusService();
+
     setLoading(true);
+
     try {
-      const metadata = await geniusService.getSongMetadata(song.title); // Fetch metadata
+      const songMetadata = await geniusService.getSongMetadata(song.title);
+
       if (metadata) {
-        setSelectedSongMetadata(metadata);
-        const songLyrics = await geniusService.getSongLyrics(metadata.id); // Fetch lyrics
+        setSelectedSongMetadata(songMetadata);
+
+        const songLyrics = await geniusService.getSongLyrics(songMetadata.id);
+
         setSelectedSongLyrics(songLyrics);
-        // Navigate to the lyrics page and pass the song data
+        
         navigate('/lyrics', { state: { selectedSong: song } });
       }
-    } catch (error) {
+    }
+    catch (e) {
       setError('Error fetching song details');
-      console.error('Error fetching song details:', error);
-    } finally {
+      console.error('Error fetching song details: ', e);
+    }
+    finally { 
       setLoading(false);
     }
   };

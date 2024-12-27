@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';  // Add this import
-
+import { Routes, Route } from 'react-router-dom';  
 import './App.css';
-import { SONGS_ALL } from './songs';
 
-import GeniusService from './geniusService';
-import useFetchSongs from "./hooks/useFetchSongs";
-import useHandleSongClick from "./hooks/useHandleSongClick";
+import GeniusService from './geniusService';  
+import useHandleSongClick from './hooks/useHandleSongClick';  
+import useFilteredSongs from './hooks/useFilteredSongs';  
 
 import SearchBar from './components/SearchBar';
 import SongResults from './components/SongResults';
@@ -17,40 +15,31 @@ import LyricsPage from './components/LyricsPage';
 const App = () => {
   const geniusService = new GeniusService();
 
+  // Manage search & filtering state
   const [searchTerm, setSearchTerm] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
 
-  const { filteredSongs } = useFetchSongs(searchTerm);
+  // Custom hook for filtering songs
+  const filteredSongs = useFilteredSongs(searchTerm);
+  // Custom hook for when a song is selected
   const { handleSongClick, selectedSongMetadata, selectedSongLyrics, loading, error } = useHandleSongClick();
 
-  // Handle search for songs based on title
-  useEffect(() => {
-    if (searchTerm.trim() !== "") {
-      // Flip when user starts typing
-      setHasSearched(true);
-    } else {
-      setFilteredSongs([]);
-      // Flip back when search term is empty
-      setHasSearched(false);
-    }
-  }, [searchTerm]);
 
-  // Filter songs based on the search term
-  useEffect(() => {
-    if (searchTerm.trim() === "") {
-      // Clear songs when no search term
-      setFilteredSongs([]);
-    }
-    else {
-      const results = SONGS_ALL.filter((song) =>
-        song.title.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setFilteredSongs(results);
-    }
-    
-  }, [searchTerm]);
+  // Only show song results or no results if user has searched something
+  useEffect(() => 
+    {
+      if (searchTerm.trim() !== "") {
+        setHasSearched(true);
+      }
+      else {
+        setHasSearched(false);
+      }
+    },
+    [searchTerm]
+  );
 
-  // Content that will be rendered
+  console.log("filteredSongs:", filteredSongs);
+
   return (
     <div className="app-container">
       <div className="content-container">
@@ -67,22 +56,19 @@ const App = () => {
 
         {/* Song results */}
         <Routes>
-          {/* Display results of search on home page */}
           <Route
             path="/"
             element={<SongResults filteredSongs={filteredSongs} handleSongClick={handleSongClick} />}
           />
-          {/* Navigate to different page for song with lyrics */}
           <Route
             path="/lyrics"
             element={<LyricsPage selectedSongMetadata={selectedSongMetadata} selectedSongLyrics={selectedSongLyrics} />}
           />
         </Routes>
-        
-        {/* No song results message */}
-        {hasSearched && filteredSongs.length === 0 && (
-          <NoSongResults />
-        )}
+
+
+        {/* No song results */}
+        {hasSearched && filteredSongs.length === 0 && <NoSongResults filteredSongs={filteredSongs} />}
       </div>
     </div>
   );

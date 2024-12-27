@@ -8,7 +8,14 @@ const SongResults = ({ filteredSongs, handleSongClick }) => {
   return (
     <ul className="song-results">
       {filteredSongs.map((song) => (
-        <li key={song.id} className="song-item" onClick={() => handleSongClick(song, navigate)}>
+        <li 
+          key={song.id} 
+          className="song-item" 
+          onClick={() => {
+            console.log("Song clicked:", song);  // Check if song is passed correctly
+            handleSongClick(song, navigate);  // Trigger the click handler
+          }}
+        >
           <div className="song-title"><strong>{song.title}</strong></div>
           <div className="song-film">— {song.film}</div>
         </li>
