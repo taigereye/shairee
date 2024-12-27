@@ -1,5 +1,5 @@
 import { useState } from "react";
-import GeniusService from "../geniusService";
+import GeniusApiService from "../geniusApiService";
 
 
 const useHandleSongClick = () => {

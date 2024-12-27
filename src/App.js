@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';  
 import './App.css';
 
-import GeniusService from './geniusService';  
+import GeniusApiService from './geniusApiService';  
 import useHandleSongClick from './hooks/useHandleSongClick';  
 import useFilteredSongs from './hooks/useFilteredSongs';  
 
