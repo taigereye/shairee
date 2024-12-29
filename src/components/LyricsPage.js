@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";  // for getting the song details passed via the router
+// LyricsPage.js
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 
 const LyricsPage = () => {
+  // Retrieve song data passed via the router
   const location = useLocation();
-  const { selectedSong } = location.state || {};  // Retrieve the song data passed from the homepage
-  
+  const { selectedSong } = location.state || {};
+
   const [songMetadata, setSongMetadata] = useState(null);
   const [songLyrics, setSongLyrics] = useState(null);
 
+  // Set song data passed from home page
   useEffect(() => {
     if (selectedSong) {
-      // Here you would fetch metadata and lyrics based on the song title.
-      // This is an example. You'll need to fetch this information from the Genius API.
       setSongMetadata({
         title: selectedSong.title,
         artist: selectedSong.artist,
@@ -20,12 +21,13 @@ const LyricsPage = () => {
         url: selectedSong.url,
       });
 
-      setSongLyrics("Lyrics of the song go here..."); // Placeholder for actual lyrics
+      setSongLyrics(selectedSong.lyrics);
     }
   }, [selectedSong]);
 
+  // If no song was selected, allow user to go back
   if (!selectedSong) {
-    return <p>Loading...</p>;
+    return <div><br></br><p>back to home</p></div>;
   }
 
   return (

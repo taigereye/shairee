@@ -11,10 +11,7 @@ const SongResults = ({ filteredSongs, handleSongClick }) => {
         <li 
           key={song.id} 
           className="song-item" 
-          onClick={() => {
-            console.log("Song clicked:", song);  // Check if song is passed correctly
-            handleSongClick(song, navigate);  // Trigger the click handler
-          }}
+          onClick={() => { handleSongClick(song, navigate); }}
         >
           <div className="song-title"><strong>{song.title}</strong></div>
           <div className="song-film">— {song.film}</div>

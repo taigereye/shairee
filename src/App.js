@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';  
 import './App.css';
 
-import GeniusApiService from './geniusApiService';  
-import useHandleSongClick from './hooks/useHandleSongClick';  
-import useFilteredSongs from './hooks/useFilteredSongs';  
+import useHandleSongClick from './hooks/useHandleSongClick';
+import useFilteredSongs from './hooks/useFilteredSongs';
 
 import SearchBar from './components/SearchBar';
 import SongResults from './components/SongResults';
@@ -13,32 +12,24 @@ import LyricsPage from './components/LyricsPage';
 
 
 const App = () => {
-  const geniusService = new GeniusService();
-
   // Manage search & filtering state
   const [searchTerm, setSearchTerm] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
 
   // Custom hook for filtering songs
   const filteredSongs = useFilteredSongs(searchTerm);
-  // Custom hook for when a song is selected
+
+  // Custom hook for when a song is selected (API calls, metadata, lyrics)
   const { handleSongClick, selectedSongMetadata, selectedSongLyrics, loading, error } = useHandleSongClick();
 
-
-  // Only show song results or no results if user has searched something
-  useEffect(() => 
-    {
-      if (searchTerm.trim() !== "") {
-        setHasSearched(true);
-      }
-      else {
-        setHasSearched(false);
-      }
-    },
-    [searchTerm]
-  );
-
-  console.log("filteredSongs:", filteredSongs);
+  // Only show song results or no results if the user has searched for something
+  useEffect(() => {
+    if (searchTerm.trim() !== "") {
+      setHasSearched(true);
+    } else {
+      setHasSearched(false);
+    }
+  }, [searchTerm]);
 
   return (
     <div className="app-container">
@@ -62,10 +53,9 @@ const App = () => {
           />
           <Route
             path="/lyrics"
-            element={<LyricsPage selectedSongMetadata={selectedSongMetadata} selectedSongLyrics={selectedSongLyrics} />}
+            element={<LyricsPage />}
           />
         </Routes>
-
 
         {/* No song results */}
         {hasSearched && filteredSongs.length === 0 && <NoSongResults filteredSongs={filteredSongs} />}
