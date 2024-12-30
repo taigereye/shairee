@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'; // Add useState and useEffect import
 
-import '../App.css';
+import styles from '../styles/components/SearchBar.module.css';
 
 
 const SearchBar = ({ searchTerm, setSearchTerm }) => {

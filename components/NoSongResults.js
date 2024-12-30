@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from '../styles/components/NoSongResults.module.css';
+
 
 const NoSongResults = ({ filteredSongs }) => {
   if (filteredSongs.length === 0) {

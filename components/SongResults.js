@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import styles from '../styles/components/SongResults.module.css';
+
 
 const SongResults = ({ filteredSongs, handleSongClick }) => {
   const navigate = useNavigate();

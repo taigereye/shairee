@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { SONGS_ALL } from '../songs';
+
+import { SONGS_ALL } from '../src/utils/songsAll';
 
 
 const useFilteredSongs = (searchTerm) => {

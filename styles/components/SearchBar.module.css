@@ -1,0 +1,11 @@
+/* Search bar */
+.search-bar {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  font-family: 'Palatino', serif;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

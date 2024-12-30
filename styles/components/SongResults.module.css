@@ -1,0 +1,43 @@
+/* Search results dropdown */
+.song-results {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 400px;
+  z-index: 2;
+}
+
+/* Individual song result item styles */
+.song-item {
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* No results message */
+.no-results {
+  color: #888;
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.song-item .song-title {
+  font-weight: bold;
+}
+
+/* Highlight item on hover */
+.song-item:hover {
+  background-color: #f0f0f0;
+}
+
+

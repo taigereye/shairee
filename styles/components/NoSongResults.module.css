@@ -1,0 +1,6 @@
+/* No song results message */
+.no-results {
+  color: #888;
+  margin-top: 10px;
+  font-size: 1rem;
+}

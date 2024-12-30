@@ -1,21 +1,18 @@
-import GeniusApiService from '../../geniusApiService';
+import GeniusApiService from '../../src/utils/geniusApiService';
 
 
 const geniusApiService = new GeniusApiService(process.env.GENIUS_API_KEY);
 
 export default async function handler(req, res) {
-  const { title, artist } = req.query;
+  const { title } = req.query;
 
-  // Validate that both title and artist are provided
-  if (!title || !artist) {
-    return res.status(400).json({ error: 'Missing title or artist parameter' });
+  // At least song title must be providewd
+  if (!title) {
+    return res.status(400).json({ error: 'Missing song title parameter' });
   }
 
   try {
-    // Fetch song metadata using the GeniusApiService
-    const metadata = await geniusApiService.getSongMetadata(title, artist);
-
-    // Optionally fetch song lyrics if needed
+    const metadata = await geniusApiService.getSongMetadata(title);
     const lyrics = await geniusApiService.getSongLyrics(metadata.id);
 
     // Return metadata and lyrics to the frontend
@@ -24,7 +21,6 @@ export default async function handler(req, res) {
       lyrics,
     });
   } catch (error) {
-    // Catch errors from GeniusApiService and return 500 error
     console.error('Error fetching song details:', error);
     res.status(500).json({ error: error.message });
   }

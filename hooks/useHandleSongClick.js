@@ -14,7 +14,7 @@ const useHandleSongClick = () => {
     try {
       // 1. Make API call to get song metadata via serverless function
       const metadataResponse = await axios.get('/api/geniusServerless', {
-        params: { title: song.title, artist: song.artist },
+        params: { title: song.title },
       });
 
       const { metadata } = metadataResponse.data;
@@ -34,12 +34,21 @@ const useHandleSongClick = () => {
 
       // 3. Navigate to the /lyrics page with all song data
       navigate('/lyrics', {
-        state: { song: { title: song.title, artist: song.artist, albumArt: song.albumArt, lyrics } },
+        state: { 
+          song: { 
+            title: metadata.title,
+            artist: metadata.artist,
+            albumArt: metadata.albumArt,
+            lyricsText: lyrics 
+          } 
+        },
       });
-    } catch (error) {
+    } 
+    catch (error) {
       setError('Error fetching song details');
       console.error('Error fetching song details: ', error);
-    } finally {
+    } 
+    finally {
       setLoading(false);
     }
   };

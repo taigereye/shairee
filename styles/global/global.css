@@ -1,0 +1,29 @@
+/* Global styles */
+body {
+  margin: 0;
+  font-family: 'Palatino', 'Garamond', serif;
+  overflow: hidden; /* prevent scrolling */
+}
+
+/* Main container with full height */
+.app-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: white;
+}
+
+/* Overlay PNG image with opacity */
+.app-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/mandala-burgundy-overlay.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: -1; /* keeps the overlay behind content */
+}

@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';  
-import '../App.css';
 
-import useHandleSongClick from './hooks/useHandleSongClick';
-import useFilteredSongs from './hooks/useFilteredSongs';
+import styles from '../styles/components/HomePage.module.css';
 
-import SearchBar from './components/SearchBar';
-import SongResults from './components/SongResults';
-import NoSongResults from './components/NoSongResults';
-import LyricsPage from './components/LyricsPage';
+import useHandleSongClick from '../hooks/useHandleSongClick';
+import useFilteredSongs from '../hooks/useFilteredSongs';
+
+import SearchBar from '../components/SearchBar';
+import SongResults from '../components/SongResults';
+import NoSongResults from '../components/NoSongResults';
+import LyricsPage from '../components/LyricsPage';
 
 
-const App = () => {
+const HomePage = () => {
   // Manage search & filtering state
   const [searchTerm, setSearchTerm] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
@@ -64,4 +65,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default HomePage;
