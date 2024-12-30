@@ -1,11 +1,20 @@
 class SongMetadata {
-  constructor(title, film, artist, album, albumArtUrl, urlGenius) {
+  constructor(id, title, film, artist, album, albumArtUrl, urlGenius) {
+    this.id = id;
     this.title = title;
     this.film = film;
     this.artist = artist;
     this.album = album || '';
     this.urlAlbumArt = urlAlbumArt || '';
     this.urlGenius = urlGenius || '';
+  }
+
+  getId() {
+    return this.id;
+  }
+
+  setId(id) {
+    this.id = id;
   }
 
   getTitle() {
