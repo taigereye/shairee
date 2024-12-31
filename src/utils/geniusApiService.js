@@ -1,5 +1,8 @@
 import axios from 'axios';
-import fs from 'fs';
+
+import GeniusSong from '../models/GeniusSong'
+import GeniusSongMetadata from '../models/GeniusSongMetadata';
+import GeniusSongLyrics from '../models/GeniusSongMetadata';
 
 
 class GeniusApiService {
@@ -8,12 +11,10 @@ class GeniusApiService {
     this.baseUrl = 'https://api.genius.com';
   }
 
-  // Helper function to format song query params
-  formatSongQuery(title) {
+  static formatSongQuery(title) {
     return encodeURIComponent(title.trim());
   }
 
-  // Get song metadata based on params
   async getSongMetadata(title) {
     try {
       const query = this.formatSongQuery(title);
@@ -23,21 +24,28 @@ class GeniusApiService {
       });
 
       const songData = response.data.response.hits[0]?.result;
-      
       if (!songData) throw new Error('Song not found by title search');
-      
-      return {
-        id: songData.id,
-        title: songData.full_title,
-        albumArt: songData.song_art_image_url,
-        url: songData.url,
-      };
-    } catch (e) {
+
+      // Combine primary and featured artists
+      const primaryArtist = songData.primary_artist.name;
+      const featuredArtists = songData.artists ? songData.artists.map(artist => artist.name).join(', ') : '';
+      const allArtists = featuredArtists ? `${primaryArtist}, ${featuredArtists}` : primaryArtist;
+
+      const songMetadata = new GeniusSongMetadata(
+        songData.full_title,
+        allArtists,
+        songData.album ? songData.album.name : '',
+        songData.song_art_image_url,
+        songData.url
+      );
+
+      return songMetadata;
+    }
+    catch (e) {
       throw new Error('Error fetching song metadata: ' + e.message);
     }
   }
 
-  // Get song lyrics based on song ID
   async getSongLyrics(songId) {
     try {
       const response = await axios.get(`${this.baseUrl}/songs/${songId}`, {
@@ -45,23 +53,25 @@ class GeniusApiService {
       });
 
       const lyricsPath = response.data.response.song.path;
-
       if (!lyricsPath) throw new Error('Song lyrics URL not found');
 
       const lyricsPage = await axios.get('https://genius.com' + lyricsPath);
+      if (!lyricsPage) throw new Error('Page with song lyrics not found');
 
+      const songLyrics = new GeniusSongLyrics(lyricsPage.data);
+      songLyrics.extractLyricsFromHtml();
 
-      const $ = require('cheerio').load(lyricsPage.data);
-
-      return $('#lyrics').text().trim();
-
-
-      // fs.writeFileSync('lyricsPage.html', lyricsPage.data, 'utf8');
-      // return 'HTML saved to lyricsPage.html for inspection';
-    } 
+      return songLyrics;
+    }
     catch (e) {
       throw new Error('Error fetching song lyrics: ' + e.message);
     }
+
+  }
+
+  static createSong(songMetadata, songLyrics) {
+    const song = new GeniusSong(songMetadata, songLyrics);
+    return song;
   }
 
 }

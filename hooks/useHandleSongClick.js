@@ -5,6 +5,7 @@ import axios from 'axios';
 const useHandleSongClick = () => {
   const [selectedSongMetadata, setSelectedSongMetadata] = useState(null);
   const [selectedSongLyrics, setSelectedSongLyrics] = useState(null);
+  const [geniusSong, setGeniusSong] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -21,7 +22,7 @@ const useHandleSongClick = () => {
       const { metadata } = metadataResponse.data;
       if (!metadata) throw new Error('Song metadata not found');
 
-      const songMetadata = new SongMetadata(
+      const songMetadata = new GeniusSongMetadata(
         metadata.id,
         metadata.title,
         selectedSong.film,
@@ -38,19 +39,16 @@ const useHandleSongClick = () => {
       const { lyrics } = lyricsResponse.data;
       if (!lyrics) throw new Error('Song lyrics not found');
 
-      const songLyrics = new SongLyrics(lyrics)
+      const songLyrics = new GeniusSongLyrics(lyrics)
       setSelectedSongLyrics(songLyrics);
 
       // 3. Navigate to the /lyrics page with all song data
 
+      const geniusSong = new GeniusSong(songMetadata, songLyrics);
+
       navigate('/lyrics', {
         state: { 
-          song: { 
-            title: metadata.title,
-            artist: metadata.artist,
-            albumArt: metadata.albumArt,
-            lyricsText: lyrics 
-          } 
+          song: geniusSong
         },
       });
     } 

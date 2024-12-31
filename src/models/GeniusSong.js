@@ -1,8 +1,8 @@
-import SongMetadata from './SongMetadata';
-import SongLyrics from './SongLyrics';
+import GeniusSongMetadata from './GeniusSongMetadata';
+import GeniusSongLyrics from './GeniusSongLyrics';
 
 
-class Song {
+class GeniusSong {
   constructor(songMetadata, songLyrics) {
     this.metadata = songMetadata;
     this.lyrics = songLyrics;
@@ -33,4 +33,4 @@ class Song {
   }
 }
 
-export default Song;
+export default GeniusSong;

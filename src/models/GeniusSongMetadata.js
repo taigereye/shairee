@@ -1,9 +1,9 @@
-class SongMetadata {
-  constructor(id, title, film, artist, album, albumArtUrl, urlGenius) {
+class GeniusSongMetadata {
+  constructor(id, title, film, artists, album, albumArtUrl, urlGenius) {
     this.id = id;
     this.title = title;
     this.film = film;
-    this.artist = artist;
+    this.artists = artists;
     this.album = album || '';
     this.urlAlbumArt = urlAlbumArt || '';
     this.urlGenius = urlGenius || '';
@@ -33,12 +33,12 @@ class SongMetadata {
     this.film = film;
   }
 
-  getArtist() {
-    return this.artist;
+  getArtists() {
+    return this.artists;
   }
 
-  setArtist(artist) {
-    this.artist = artist;
+  setArtists(artists) {
+    this.artists = artists;
   }
 
   getAlbum() {
@@ -66,4 +66,4 @@ class SongMetadata {
   }
 }
 
-export default SongMetadata;
+export default GeniusSongMetadata;
