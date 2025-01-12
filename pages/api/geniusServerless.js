@@ -6,12 +6,33 @@ const geniusApiService = new GeniusApiService(process.env.GENIUS_API_KEY);
 export default async function handler(req, res) {
   const { title } = req.query;
 
+
+
+
+  console.log('Incoming request parameters:', req.query);
+
+
+
+
+
   // At least song title must be providewd
   if (!title) {
     return res.status(400).json({ error: 'Missing song title parameter' });
   }
 
   try {
+
+
+
+
+
+    console.log('Using API key:', process.env.GENIUS_API_KEY);
+    console.log('Genius API Request:', `https://api.genius.com/search?q=${title}`);
+
+
+
+
+
     const metadata = await geniusApiService.getSongMetadata(title);
     const lyrics = await geniusApiService.getSongLyrics(metadata.id);
 

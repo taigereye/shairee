@@ -1,4 +1,5 @@
-import '../styles/global/global.css'; 
+import '../styles/global.css';
+
 
 function ShaireeApp({ Component, pageProps }) {
   return <Component {...pageProps} />;

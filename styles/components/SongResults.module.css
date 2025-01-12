@@ -1,43 +1,49 @@
 /* Search results dropdown */
-.song-results {
-  list-style-type: none;
-  padding: 0;
-  margin-top: 10px;
+.songResultsContainer {
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.songResults {
+  width: 100%;
   max-height: 400px;
+  max-width: 400px;
   overflow-y: auto;
+  list-style-type: none;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: white;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 400px;
-  z-index: 2;
+}
+
+.songResults:empty {
+  border-top: 1px solid #ccc;
+  margin-bottom: 20px;
 }
 
 /* Individual song result item styles */
-.song-item {
+.songItem {
   text-align: left;
   padding: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+/* Highlight item on hover */
+.songItem:hover {
+  background-color: #f0f0f0;
+}
+.songItem .songTitle {
+  font-weight: bold;
+}
+
+.songItem .songTitle {
+  font-weight: bold;
+}
 
 /* No results message */
-.no-results {
+.noResults {
   color: #888;
   margin-top: 10px;
   font-size: 1rem;
 }
-
-.song-item .song-title {
-  font-weight: bold;
-}
-
-/* Highlight item on hover */
-.song-item:hover {
-  background-color: #f0f0f0;
-}
-
-

@@ -13,18 +13,20 @@ const SongResults = ({ filteredSongs, handleSongClick }) => {
   };
 
   return (
-    <ul className={styles.songResults}>
-      {filteredSongs.map((song) => (
-        <li
-          key={song.id}
-          className={styles.songItem}
-          onClick={() => handleSongSelection(song)}
-        >
-          <div className="song-title"><strong>{song.title}</strong></div>
-          <div className="song-film">— {song.film}</div>
-        </li>
-      ))}
-    </ul>
+    <div className={styles.songResultsContainer}>
+      <ul className={styles.songResults}>
+        {filteredSongs.map((song) => (
+          <li
+            key={song.id}
+            className={styles.songItem}
+            onClick={() => handleSongSelection(song)}
+          >
+            <div className={styles.songTitle}><strong>{song.title}</strong></div>
+            <div className={styles.songFilm}>— {song.film}</div>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 

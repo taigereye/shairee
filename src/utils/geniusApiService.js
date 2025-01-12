@@ -17,7 +17,7 @@ class GeniusApiService {
 
   async getSongMetadata(title) {
     try {
-      const query = this.formatSongQuery(title);
+      const query = GeniusApiService.formatSongQuery(title);
       const response = await axios.get(`${this.baseUrl}/search`, {
         params: { q: query },
         headers: { Authorization: `Bearer ${this.apiToken}` },

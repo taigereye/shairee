@@ -1,11 +1,17 @@
-/* Search bar */
-.search-bar {
+.searchBarContainer {
+  display: flex;
+  justify-content: center;
+  padding-top: 30px;
+}
+
+.searchBar {
   width: 100%;
   max-width: 400px;
   padding: 10px;
+  margin-bottom: 10px;  /* Space between search bar and gray line */
   font-family: 'Palatino', serif;
   font-size: 1rem;
-  margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box;  /* Ensure padding and border are included in width */
 }

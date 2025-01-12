@@ -4,6 +4,7 @@ import Link from 'next/link';
 import useHandleSongClick from '../hooks/useHandleSongClick';
 import useFilteredSongs from '../hooks/useFilteredSongs';
 
+import HeaderShairee from '../components/HeaderShairee';
 import SearchBar from '../components/SearchBar';
 import SongResults from '../components/SongResults';
 import NoSongResults from '../components/NoSongResults';
@@ -11,7 +12,7 @@ import NoSongResults from '../components/NoSongResults';
 import styles from '../styles/components/HomePage.module.css';
 
 
-const HomePage = () => {
+const HomePage = () => {  
   const [searchTerm, setSearchTerm] = useState('');
   const [hasSearched, setHasSearched] = useState(false);
 
@@ -27,37 +28,17 @@ const HomePage = () => {
   }, [searchTerm]);
 
   return (
-    <div className="app-container">
-      <div className="content-container">
+    <div className={styles.appContainer}>
+      <div className={styles.contentContainer}>
 
-        {/* Header */}
-        <h1 className="title">शायरी</h1>
-        <h1 className="title">Shairee</h1>
-        <p className="description">
-          A humble place to understand and appreciate the lyrical beauty of Urdu & Hindi songs.
-        </p>
+        <HeaderShairee/>
 
-
-        {/* Search bar */}
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} placeholder="Search for a song... gana... गाना..." />
         
-        {/* Song results */}
         <SongResults filteredSongs={filteredSongs} handleSongClick={handleSongClick} />
 
-        {/* No song results */}
-        {hasSearched && filteredSongs.length === 0 && <NoSongResults filteredSongs={filteredSongs} />}
-
-
-        {/* Link navigation */}
-        <div>
-          <Link href="/">
-            <a>Go to Home Page</a>
-          </Link>
-          <Link href="/lyrics">
-            <a>Go to Lyrics Page</a>
-          </Link>
-        </div>
-
+        {hasSearched && filteredSongs.length === 0 && <NoSongResults/>}
+ 
       </div>
     </div>
   );

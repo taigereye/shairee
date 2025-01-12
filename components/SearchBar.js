@@ -15,13 +15,15 @@ const SearchBar = ({ searchTerm, setSearchTerm }) => {
   }, [searchTerm]);
 
   return (
-    <input
-      type="text"
-      placeholder="Search for a song... gana... गाना..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-      className="search-bar"
-    />
+    <div className={styles.searchBarContainer}>
+      <input
+        type="text"
+        placeholder="Search for a song... gana... गाना..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className={styles.searchBar}
+      />
+    </div>
   );
 };
 

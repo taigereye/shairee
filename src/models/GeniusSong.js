@@ -33,4 +33,4 @@ class GeniusSong {
   }
 }
 
-export default GeniusSong;
+module.exports = GeniusSong;

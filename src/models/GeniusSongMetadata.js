@@ -66,4 +66,4 @@ class GeniusSongMetadata {
   }
 }
 
-export default GeniusSongMetadata;
+module.exports = GeniusSongMetadata;

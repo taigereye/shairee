@@ -1,12 +1,23 @@
-/* Title */
-.title {
-  font-family: 'Palatino', serif;
-  font-size: 2.5rem;
-  margin-bottom: 15px;
+/* Main container */
+.appContainer {
+  display: grid;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-color: white;
 }
 
-/* Description */
-.description {
-  font-size: 1rem;
-  margin-bottom: 30px;
+/* Overlay PNG image with opacity */
+.appContainer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/mandala-burgundy-overlay.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.3;
+  z-index: -1; /* keeps overlay behind content */
 }

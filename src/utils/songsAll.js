@@ -372,7 +372,8 @@ const SONGS_1970 = [
   { "id": "1970-0146", "title": "Zindagi Ek Safar Hai Suhana", "film": "Andaz", "artists": [] },
   { "id": "1970-0147", "title": "Zindagi Ka Safar", "film": "Safar", "artists": [] },
   { "id": "1970-0148", "title": "Zindagi Kaisi Hai Paheli", "film": "Anand", "artists": [] },
-  { "id": "1970-0149", "title": "Zuban Pe Dard Bhari Dastaan Chali Aayi", "film": "Maryada", "artists": [] }
+  { "id": "1970-0149", "title": "Zuban Pe Dard Bhari Dastaan Chali Aayi", "film": "Maryada", "artists": [] },
+  { "id": "1970-0150", "title": "Phoolon Ke Rang Se", "film": "Prem Pujari", "artists": [] }
 ];
 
 

@@ -14,13 +14,19 @@ const useHandleSongClick = () => {
 
     try {
       // 1. Make API call to get song metadata via serverless function
+      const url = '/api/geniusServerless';
+      const params = { title: selectedSong.title };
 
-      const metadataResponse = await axios.get('/api/geniusServerless', {
-        params: { title: selectedSong.title },
-      });
+      const metadataResponse = await axios.get(url, { params });
 
       const { metadata } = metadataResponse.data;
       if (!metadata) throw new Error('Song metadata not found');
+
+      
+
+      console.log('Metadata response:', metadata);
+
+
 
       const songMetadata = new GeniusSongMetadata(
         metadata.id,
